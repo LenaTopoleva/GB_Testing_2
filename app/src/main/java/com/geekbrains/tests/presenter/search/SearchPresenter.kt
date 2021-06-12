@@ -1,8 +1,10 @@
 package com.geekbrains.tests.presenter.search
 
+import androidx.annotation.VisibleForTesting
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.repository.GitHubRepository
 import com.geekbrains.tests.repository.GitHubRepository.GitHubRepositoryCallback
+import com.geekbrains.tests.view.ViewContract
 import com.geekbrains.tests.view.search.ViewSearchContract
 import retrofit2.Response
 
@@ -15,36 +17,50 @@ import retrofit2.Response
  */
 
 internal class SearchPresenter internal constructor(
-    private val viewContract: ViewSearchContract,
-    private val repository: GitHubRepository
+        private val repository: GitHubRepository,
+        private var viewContract: ViewSearchContract? = null
 ) : PresenterSearchContract, GitHubRepositoryCallback {
 
+    @VisibleForTesting
+    fun getViewContract(): ViewContract? { return viewContract }
+
     override fun searchGitHub(searchQuery: String) {
-        viewContract.displayLoading(true)
+        viewContract?.displayLoading(true)
         repository.searchGithub(searchQuery, this)
     }
 
     override fun handleGitHubResponse(response: Response<SearchResponse?>?) {
-        viewContract.displayLoading(false)
+        viewContract?.displayLoading(false)
         if (response != null && response.isSuccessful) {
             val searchResponse = response.body()
             val searchResults = searchResponse?.searchResults
             val totalCount = searchResponse?.totalCount
             if (searchResults != null && totalCount != null) {
-                viewContract.displaySearchResults(
+                viewContract?.displaySearchResults(
                     searchResults,
                     totalCount
                 )
             } else {
-                viewContract.displayError("Search results or total count are null")
+                viewContract?.displayError("Search results or total count are null")
             }
         } else {
-            viewContract.displayError("Response is null or unsuccessful")
+            viewContract?.displayError("Response is null or unsuccessful")
         }
     }
 
     override fun handleGitHubError() {
-        viewContract.displayLoading(false)
-        viewContract.displayError()
+        viewContract?.displayLoading(false)
+        viewContract?.displayError()
     }
+
+    override fun onAttach(viewContract: ViewContract) {
+        this.viewContract = viewContract as ViewSearchContract
+        print("SearchPresenter onAttach()")
+    }
+
+    override fun onDetach() {
+        viewContract = null
+        print("SearchPresenter onDetach()")
+    }
+
 }
