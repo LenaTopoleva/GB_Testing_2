@@ -22,8 +22,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
-import androidx.test.espresso.intent.rule.IntentsTestRule
-import org.junit.Rule
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityEspressoTest {
@@ -101,12 +99,8 @@ class MainActivityEspressoTest {
         onView(withId(R.id.searchEditText)).perform(replaceText("algol"), closeSoftKeyboard())
         onView(withId(R.id.searchEditText)).perform(pressImeActionButton())
 
-        if (BuildConfig.TYPE == MainActivity.FAKE) {
-            onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 42")))
-        } else {
-            onView(isRoot()).perform(delay())
-            onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 2419")))
-        }
+        onView(isRoot()).perform(delay())
+        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 2418")))
     }
 
     @Test
@@ -115,7 +109,7 @@ class MainActivityEspressoTest {
         intended(hasComponent(DetailsActivity::class.java.name))
     }
 
-    private fun delay(): ViewAction? {
+    private fun delay(): ViewAction {
         return object : ViewAction {
             override fun getConstraints(): Matcher<View> = isRoot()
             override fun getDescription(): String = "wait for $2 seconds"
@@ -128,5 +122,6 @@ class MainActivityEspressoTest {
     @After
     fun close() {
         scenario.close()
+        Intents.release()
     }
 }
