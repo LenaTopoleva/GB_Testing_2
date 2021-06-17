@@ -34,6 +34,9 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         toDetailsActivityButton.setOnClickListener {
             startActivity(DetailsActivity.getIntent(this, totalCount))
         }
+        searchButton.setOnClickListener{
+            if (!searchEditTextIsEmpty(searchEditText)) presenter.searchGitHub(searchEditText.text.toString())
+        }
         setQueryListener()
         setRecyclerView()
     }
@@ -46,21 +49,26 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     private fun setQueryListener() {
         searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val query = searchEditText.text.toString()
-                if (query.isNotBlank()) {
-                    presenter.searchGitHub(query)
+                if (!searchEditTextIsEmpty(searchEditText)) {
+                    presenter.searchGitHub(searchEditText.text.toString())
                     return@OnEditorActionListener true
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.enter_search_word),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@OnEditorActionListener false
-                }
+                } else return@OnEditorActionListener false
             }
             false
         })
+    }
+
+    private fun searchEditTextIsEmpty(searchEditText: android.widget.EditText): Boolean {
+        val query = searchEditText.text.toString()
+        if (query.isNotBlank()) return false
+        else {
+            Toast.makeText(
+                this@MainActivity,
+                getString(R.string.enter_search_word),
+                Toast.LENGTH_SHORT
+            ).show()
+            return true
+        }
     }
 
     private fun createRepository(): RepositoryContract {
