@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "897852249984",
+    "project_id": "appfortesting-1e7c4",
+    "storage_bucket": "appfortesting-1e7c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897852249984:android:8df795aad22d647b685365",
+        "android_client_info": {
+          "package_name": "com.geekbrains.tests"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897852249984-ac28cgdjo8betpo597e6vbncsf0hmg76.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geekbrains.tests",
+            "certificate_hash": "2ff8dcb1bd8db96914296eaba99f3bdc9babc5f4"
+          }
+        },
+        {
+          "client_id": "897852249984-1kbt3sug52fu050uj27p6t0qlekc14mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD27TzEvO_E5t4v5vXhmzpNBy5vfAEtpQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897852249984-1kbt3sug52fu050uj27p6t0qlekc14mf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897852249984:android:93ea28e7b990a2df685365",
+        "android_client_info": {
+          "package_name": "com.geekbrains.tests.real"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897852249984-1kbt3sug52fu050uj27p6t0qlekc14mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD27TzEvO_E5t4v5vXhmzpNBy5vfAEtpQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897852249984-1kbt3sug52fu050uj27p6t0qlekc14mf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

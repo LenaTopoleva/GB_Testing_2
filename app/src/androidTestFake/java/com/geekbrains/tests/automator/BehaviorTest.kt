@@ -10,6 +10,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.*
+import com.geekbrains.tests.GITHUB_FAKE_REPOSITORY_COUNT
+import com.geekbrains.tests.NUMBER_OF_RESULTS_ZERO
 import com.geekbrains.tests.R
 import org.junit.Assert
 import org.junit.Before
@@ -76,7 +78,7 @@ class BehaviorTest {
             )
         //Убеждаемся, что сервер вернул корректный результат. Обратите внимание, что количество
         //результатов может варьироваться во времени, потому что количество репозиториев постоянно меняется.
-        Assert.assertEquals(changedText.text.toString(), "Number of results: 42")
+        Assert.assertEquals(changedText.text.toString(), "Number of results: $GITHUB_FAKE_REPOSITORY_COUNT")
     }
 
     //Убеждаемся, что после нажатия searchButton при пустом поле поиска totalCountTextView не отображается
@@ -124,7 +126,7 @@ class BehaviorTest {
         //так как мы кликаем по кнопке не отправляя никаких поисковых запросов.
         //Чтобы проверить отображение определенного количества репозиториев,
         //вам в одном и том же методе нужно отправить запрос на сервер и открыть DetailsScreen.
-        Assert.assertEquals(changedText.text, "Number of results: 0")
+        Assert.assertEquals(changedText.text, NUMBER_OF_RESULTS_ZERO)
     }
 
     //Убеждаемся, что DetailsScreen отображает верное кол-во репозиториев
