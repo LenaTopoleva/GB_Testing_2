@@ -51,6 +51,24 @@ android {
         }
     }
 
+    sourceSets {
+        androidTest {
+            java.srcDirs += "src/sharedTestData/java"
+        }
+        androidTestFake {
+            java.srcDirs += "src/sharedTestData/java"
+        }
+        androidTestReal {
+            java.srcDirs += "src/sharedTestData/java"
+        }
+        test {
+            java.srcDirs += "src/sharedTestData/java"
+        }
+        testReal {
+            java.srcDirs += "src/sharedTestData/java"
+        }
+    }
+
 }
 
 dependencies {

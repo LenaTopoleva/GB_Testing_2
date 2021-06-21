@@ -95,7 +95,7 @@ class MainActivityEspressoTest {
         onView(withId(R.id.searchEditText)).perform(replaceText("algol"), closeSoftKeyboard())
         onView(withId(R.id.searchEditText)).perform(pressImeActionButton())
 
-        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 42")))
+        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: $GITHUB_FAKE_REPOSITORY_COUNT")))
     }
 
     @Test

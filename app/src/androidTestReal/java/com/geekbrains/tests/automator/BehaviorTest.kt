@@ -10,6 +10,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.*
+import com.geekbrains.tests.NUMBER_OF_RESULTS_ZERO
 import com.geekbrains.tests.R
 import org.junit.After
 import org.junit.Assert
@@ -174,7 +175,7 @@ class BehaviorTest {
         //так как мы кликаем по кнопке не отправляя никаких поисковых запросов.
         //Чтобы проверить отображение определенного количества репозиториев,
         //вам в одном и том же методе нужно отправить запрос на сервер и открыть DetailsScreen.
-        Assert.assertEquals(changedText.text, "Number of results: 0")
+        Assert.assertEquals(changedText.text, NUMBER_OF_RESULTS_ZERO)
     }
 
     //Убеждаемся, что DetailsScreen отображает верное кол-во репозиториев
